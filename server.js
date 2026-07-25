@@ -2,29 +2,47 @@ const express = require("express");
 const admin = require("firebase-admin");
 
 const app = express();
-
 app.use(express.json());
 
-// Home page
+// Initialize Firebase
+const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount)
+});
+
+const db = admin.firestore();
+
+// Home
 app.get("/", (req, res) => {
-    res.send("Rewardly Postback Server is running ✅");
+  res.send("Rewardly Postback Server Running ✅");
 });
 
-// Test endpoint
-app.get("/test", (req, res) => {
+// Test Firebase
+app.get("/test", async (req, res) => {
+  try {
+    const users = await db.collection("users").limit(1).get();
+
     res.json({
-        success: true,
-        message: "Server is working!"
+      success: true,
+      usersFound: users.size
     });
+
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      error: err.message
+    });
+  }
 });
 
-// Placeholder for Bitcotask postback
+// BitcoTask Postback (we'll complete this next)
 app.get("/postback", async (req, res) => {
-    res.send("Postback received");
+  res.send("Postback received");
 });
 
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });
