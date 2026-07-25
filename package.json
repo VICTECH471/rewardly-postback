@@ -1,14 +1,13 @@
 {
   "name": "rewardly-postback",
   "version": "1.0.0",
-  "description": "Rewardly Bitcotask Postback Server",
+  "description": "Rewardly Postback Server",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
   "dependencies": {
-    "express": "^4.21.0",
-    "firebase-admin": "^13.0.0",
-    "dotenv": "^16.4.7"
+    "express": "^4.19.2",
+    "firebase-admin": "^13.0.0"
   }
 }
