@@ -1,5 +1,4 @@
-        db.collection("offerwall_history").doc(),
-        {const express = require("express");
+        const express = require("express");
 const admin = require("firebase-admin");
 const md5 = require("md5");
 
