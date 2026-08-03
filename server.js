@@ -67,9 +67,13 @@ console.log(req.query);
     }
 
     // Verify signature
+
+          console.log("Incoming Query:", req.query);
     const expectedSignature = md5(
       subId + transId + reward + SECRET_KEY
     );
+          console.log("Expected Signature:", expectedSignature);
+console.log("Received Signature:", signature);
 
     if (expectedSignature !== signature) {
       return res.status(403).send("Invalid Signature");
