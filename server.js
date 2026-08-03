@@ -44,7 +44,8 @@ app.get("/test", async (req, res) => {
 
 // BitcoTasks Postback
 app.get("/postback", async (req, res) => {
-
+console.log("POSTBACK HIT");
+console.log(req.query);
   try {
 
     const {
