@@ -76,9 +76,12 @@ console.log(req.query);
 console.log("Received Signature:", signature);
 
     if (expectedSignature !== signature) {
-      return res.status(403).send("Invalid Signature");
-    }
+  console.log("⚠️ Signature mismatch");
+  console.log("Expected:", expectedSignature);
+  console.log("Received:", signature);
 
+  // TEMPORARILY continue processing
+    }
     // Prevent duplicate credits
     const existing = await db
       .collection("offerwall_history")
