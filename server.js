@@ -1,4 +1,5 @@
-const express = require("express");
+        db.collection("offerwall_history").doc(),
+        {const express = require("express");
 const admin = require("firebase-admin");
 const md5 = require("md5");
 
@@ -109,23 +110,21 @@ app.get("/postback", async (req, res) => {
         balance: currentBalance + amount
       });
 
-      transaction.set(
-        db.collection("offerwall_history").doc(),
-        {
-          userId: subId,
-          transId: transId,
-          offerName: offer_name,
-          offerType: offer_type,
-          reward: amount,
-          rewardName: reward_name,
-          payout: Number(payout || 0),
-          userIp: userIp || "",
-          country: country || "",
-          status: Number(status),
-          createdAt:
-            admin.firestore.FieldValue.serverTimestamp()
-        }
-      );
+      const historyRef = db.collection("offerwall_history").doc();
+
+transaction.set(historyRef, {
+  userId: subId,
+  transId: transId,
+  offerName: offer_name,
+  offerType: offer_type,
+  reward: amount,
+  rewardName: reward_name,
+  payout: Number(payout || 0),
+  userIp: userIp || "",
+  country: country || "",
+  status: Number(status),
+  createdAt: admin.firestore.FieldValue.serverTimestamp()
+});
 
     });
 
