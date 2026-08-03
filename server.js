@@ -44,10 +44,12 @@ app.get("/test", async (req, res) => {
 
 // BitcoTasks Postback
 app.get("/postback", async (req, res) => {
-console.log("POSTBACK HIT");
-console.log(req.query);
-  try {
 
+console.log("========== POSTBACK ==========");
+console.log("URL:", req.originalUrl);
+console.log("QUERY:", JSON.stringify(req.query, null, 2));
+
+try {
     const {
       subId,
       transId,
